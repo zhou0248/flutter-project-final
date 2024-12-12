@@ -37,20 +37,23 @@ class _MovieSelectionState extends State<MovieSelectionScreen> {
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : Center(
-              child: Dismissible(
-                key: Key(movies[0]['id'].toString()),
-                onDismissed: (direction) {
-                  setState(() {
-                    movies.removeAt(0);
-                  });
-                },
-                child: Stack(
-                  children: [
-                    movies[0]['poster_path'] == null
-                        ? Image.network(
-                            '$imageBaseUrl${movies[0]['poster_path']}')
-                        : Image.asset('assets/default_poster.jpg'),
-                  ],
+              child: Padding(
+                padding: AppTheme.defaultPadding,
+                child: Dismissible(
+                  key: Key(movies[0]['id'].toString()),
+                  onDismissed: (direction) {
+                    setState(() {
+                      movies.removeAt(0);
+                    });
+                  },
+                  child: Stack(
+                    children: [
+                      movies[0]['poster_path'] == null
+                          ? Image.network(
+                              '$imageBaseUrl${movies[0]['poster_path']}')
+                          : Image.asset('assets/default_poster.jpg'),
+                    ],
+                  ),
                 ),
               ),
             ),

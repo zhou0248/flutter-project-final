@@ -23,8 +23,12 @@ class _CodeSharingScreenState extends State<CodeSharingScreen> {
       body: Center(
         child: Column(
           children: [
-            Text('Code: $code'),
+            Padding(
+              padding: AppTheme.defaultPadding,
+              child: Text('Code: $code'),
+            ),
             ElevatedButton(
+              style: AppTheme.elevatedButtonStyle,
               onPressed: () {
                 Navigator.pop(context);
               },
