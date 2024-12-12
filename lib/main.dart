@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         colorScheme: AppTheme.colorScheme,
         textTheme: AppTheme.textTheme,
       ),
-      home: const WelcomeScreen(),
+      home: const MovieSelectionScreen(),
     );
   }
 }

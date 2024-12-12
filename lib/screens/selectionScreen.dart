@@ -4,6 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_project/helpers/appTheme.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:flutter_project/helpers/httpMVDBHelper.dart';
 
 class MovieSelectionScreen extends StatefulWidget {
   const MovieSelectionScreen({super.key});
@@ -48,10 +49,22 @@ class _MovieSelectionState extends State<MovieSelectionScreen> {
                   },
                   child: Stack(
                     children: [
-                      movies[0]['poster_path'] == null
-                          ? Image.network(
-                              '$imageBaseUrl${movies[0]['poster_path']}')
-                          : Image.asset('assets/default_poster.jpg'),
+                      Column(
+                        children: [
+                          Padding(
+                            padding: AppTheme.defaultPadding,
+                            child: Text(
+                              movies[0]['title'],
+                              style: AppTheme.textTheme.titleMedium,
+                            ),
+                          ),
+                          movies[0]['poster_path'] == null
+                              ? Image.asset('assets/default_poster.jpg')
+                              : Image.network(
+                                  '$imageBaseUrl${movies[0]['poster_path']}',
+                                )
+                        ],
+                      )
                     ],
                   ),
                 ),
@@ -61,24 +74,17 @@ class _MovieSelectionState extends State<MovieSelectionScreen> {
   }
 
   Future<void> _fetchMovies() async {
-    final apiKey = dotenv.env['TMDB_API_KEY'];
-    final response = await http.get(Uri.parse('$baseUrl?api_key=$apiKey'));
-
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
+    final getMovie = HttpMVDBHelper();
+    try {
+      var movieData = await getMovie.getPopular();
       setState(() {
-        movies = data['results'];
+        movies = movieData;
         isLoading = false;
       });
-
+    } catch (e) {
       if (kDebugMode) {
-        print(data);
-        print(data['results']);
+        print(e);
       }
-    } else {
-      setState(() {
-        isLoading = true;
-      });
     }
   }
 }

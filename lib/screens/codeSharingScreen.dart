@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/helpers/appTheme.dart';
+import 'package:flutter_project/screens/selectionScreen.dart';
 
 class CodeSharingScreen extends StatefulWidget {
   const CodeSharingScreen({super.key});
@@ -30,9 +31,13 @@ class _CodeSharingScreenState extends State<CodeSharingScreen> {
             ElevatedButton(
               style: AppTheme.elevatedButtonStyle,
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MovieSelectionScreen(),
+                    ));
               },
-              child: const Text('Share Code'),
+              child: const Text('Start Session'),
             ),
           ],
         ),

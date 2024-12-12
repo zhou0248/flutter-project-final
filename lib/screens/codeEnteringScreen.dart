@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/helpers/appTheme.dart';
+import 'package:flutter_project/screens/selectionScreen.dart';
 
 class CodeEnteringScreen extends StatefulWidget {
   const CodeEnteringScreen({super.key});
@@ -64,7 +65,11 @@ class _CodeEnteringScreenState extends State<CodeEnteringScreen> {
                   ElevatedButton(
                     style: AppTheme.elevatedButtonStyle,
                     onPressed: () {
-                      Navigator.pop(context);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MovieSelectionScreen(),
+                          ));
                     },
                     child: const Text('Join Session'),
                   ),

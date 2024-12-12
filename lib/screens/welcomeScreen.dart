@@ -47,8 +47,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     if (kDebugMode) {
       print("Device UUID: $deviceUUID");
     }
-
-    await prefs.setString('deviceUUID', deviceUUID);
+    await prefs.setString('device_id', deviceUUID);
   }
 
   @override
