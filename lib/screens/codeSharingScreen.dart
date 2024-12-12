@@ -55,20 +55,9 @@ class _CodeSharingScreenState extends State<CodeSharingScreen> {
                 children: [
                   Padding(
                     padding: AppTheme.largePadding,
-                    child: Text('Unable to Generate a Code',
-                        style: AppTheme.textTheme.titleMedium),
+                    child: const CircularProgressIndicator(),
                   ),
-                  ElevatedButton(
-                    style: AppTheme.elevatedButtonStyle,
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const WelcomeScreen(),
-                          ));
-                    },
-                    child: const Text('Return to HomePage'),
-                  ),
+                  Text('Getting code...', style: AppTheme.textTheme.bodyMedium),
                 ],
               ),
       ),

@@ -20,10 +20,6 @@ class HttpMVDBHelper {
         print(data);
       }
       movies = data['results'];
-      movies.map((movie) => movie['poster_path'] != null
-          ? movie['poster_path'] =
-              'https://image.tmdb.org/t/p/w500${movie['poster_path']}'
-          : null);
       page++;
       return movies;
     } else {
