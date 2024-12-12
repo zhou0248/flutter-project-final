@@ -24,8 +24,8 @@ class _CodeSharingScreenState extends State<CodeSharingScreen> {
         child: Column(
           children: [
             Padding(
-              padding: AppTheme.defaultPadding,
-              child: Text('Code: $code'),
+              padding: AppTheme.largePadding,
+              child: Text('Code: $code', style: AppTheme.textTheme.titleMedium),
             ),
             ElevatedButton(
               style: AppTheme.elevatedButtonStyle,
