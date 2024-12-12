@@ -12,7 +12,7 @@ class HttpMVDBHelper {
 
   Future<dynamic> getPopular() async {
     var page = 1;
-    var result = await http
+    final result = await http
         .get(Uri.parse('$baseUrl$popular?api_key=$apiKey&page=$page'));
     if (result.statusCode == 200) {
       final data = jsonDecode(result.body);
@@ -20,14 +20,13 @@ class HttpMVDBHelper {
         print(data);
       }
       movies = data['results'];
-      movies.map((movie) => movie['poster_path']
+      movies.map((movie) => movie['poster_path'] != null
           ? movie['poster_path'] =
               'https://image.tmdb.org/t/p/w500${movie['poster_path']}'
           : null);
       page++;
       return movies;
     } else {
-      print('Failed to load movies \nStatus Code: ${result.statusCode}');
       throw Exception(
           'Failed to load movies \nStatus Code: ${result.statusCode}');
     }
