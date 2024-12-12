@@ -8,7 +8,7 @@ class CodeSharingScreen extends StatefulWidget {
 }
 
 class _CodeSharingScreenState extends State<CodeSharingScreen> {
-  String code = '123456';
+  String code = '';
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class _CodeSharingScreenState extends State<CodeSharingScreen> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: const Text('Join Session'),
+              child: const Text('Share Code'),
             ),
           ],
         ),

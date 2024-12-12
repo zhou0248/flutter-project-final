@@ -1,9 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import './codeSharingScreen.dart';
+import './codeEnteringScreen.dart';
 import 'package:android_id/android_id.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'dart:io';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -13,8 +15,6 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-  String _deviceUUID = '';
-
   @override
   void initState() {
     super.initState();
@@ -23,6 +23,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   Future<void> _fetchUUID() async {
     String deviceUUID;
+    final prefs = await SharedPreferences.getInstance();
 
     try {
       if (Platform.isAndroid) {
@@ -41,11 +42,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       }
       deviceUUID = "Error: $e";
     }
-    if (mounted) {
-      setState(() {
-        _deviceUUID = deviceUUID;
-      });
+
+    if (kDebugMode) {
+      print("Device UUID: $deviceUUID");
     }
+
+    await prefs.setString('deviceUUID', deviceUUID);
   }
 
   @override
@@ -66,9 +68,18 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       builder: (context) => CodeSharingScreen(),
                     ));
               },
-              child: const Text('Start Session'),
+              child: const Text('Start a Session'),
             ),
-            Text('Device UUID: $_deviceUUID'),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CodeEnteringScreen(),
+                    ));
+              },
+              child: const Text('Join a Session'),
+            ),
           ],
         ),
       ),

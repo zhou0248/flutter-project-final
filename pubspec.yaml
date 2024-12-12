@@ -15,6 +15,7 @@ dependencies:
   flutter_dotenv:
   android_id:
   device_info_plus:
+  shared_preferences:
 
   cupertino_icons: ^1.0.8
 
