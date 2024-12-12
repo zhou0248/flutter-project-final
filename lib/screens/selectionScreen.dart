@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_project/helpers/appTheme.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -28,11 +29,13 @@ class _MovieSelectionState extends State<MovieSelectionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Movie Choice'),
-        backgroundColor: Colors.amber,
+        title: const Text("Movie Night"),
+        foregroundColor: AppTheme.appBarTheme.foregroundColor,
+        backgroundColor: AppTheme.appBarTheme.backgroundColor,
+        titleTextStyle: AppTheme.textTheme.titleMedium,
       ),
       body: isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : Center(
               child: Dismissible(
                 key: Key(movies[0]['id'].toString()),
@@ -43,7 +46,10 @@ class _MovieSelectionState extends State<MovieSelectionScreen> {
                 },
                 child: Stack(
                   children: [
-                    Image.network('$imageBaseUrl${movies[0]['poster_path']}'),
+                    movies[0]['poster_path'] == null
+                        ? Image.network(
+                            '$imageBaseUrl${movies[0]['poster_path']}')
+                        : Image.asset('assets/default_poster.jpg'),
                   ],
                 ),
               ),

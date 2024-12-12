@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project/helpers/appTheme.dart';
 
 class CodeSharingScreen extends StatefulWidget {
   const CodeSharingScreen({super.key});
@@ -14,8 +15,10 @@ class _CodeSharingScreenState extends State<CodeSharingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Share Code"),
-        backgroundColor: Colors.amber,
+        title: const Text("Movie Night"),
+        foregroundColor: AppTheme.appBarTheme.foregroundColor,
+        backgroundColor: AppTheme.appBarTheme.backgroundColor,
+        titleTextStyle: AppTheme.textTheme.titleMedium,
       ),
       body: Center(
         child: Column(

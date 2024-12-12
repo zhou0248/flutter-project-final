@@ -4,6 +4,7 @@ import './screens/codeEnteringScreen.dart';
 import './screens/codeSharingScreen.dart';
 import './screens/welcomeScreen.dart';
 import './screens/selectionScreen.dart';
+import './helpers/appTheme.dart';
 
 Future<void> main() async {
   await dotenv.load(fileName: '.env');
@@ -18,8 +19,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Movie Night',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        appBarTheme: AppTheme.appBarTheme,
+        colorScheme: AppTheme.colorScheme,
+        textTheme: AppTheme.textTheme,
       ),
       home: const WelcomeScreen(),
     );

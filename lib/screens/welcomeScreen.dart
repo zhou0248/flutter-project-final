@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_project/helpers/appTheme.dart';
 import './codeSharingScreen.dart';
 import './codeEnteringScreen.dart';
 import 'package:android_id/android_id.dart';
@@ -54,39 +55,46 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Movie Night"),
-        backgroundColor: Colors.amber,
+        title: const Text("Movie Night"),
+        foregroundColor: AppTheme.appBarTheme.foregroundColor,
+        backgroundColor: AppTheme.appBarTheme.backgroundColor,
+        titleTextStyle: AppTheme.textTheme.titleMedium,
       ),
       body: Center(
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.all(20),
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => CodeSharingScreen(),
-                      ));
-                },
-                child: const Text('Start a Session'),
+        child: Padding(
+          padding: AppTheme.defaultPadding,
+          child: Column(
+            children: [
+              Padding(
+                padding: AppTheme.defaultPadding,
+                child: ElevatedButton(
+                  style: AppTheme.elevatedButtonStyle,
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CodeSharingScreen(),
+                        ));
+                  },
+                  child: const Text('Start Session'),
+                ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(20),
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => CodeEnteringScreen(),
-                      ));
-                },
-                child: const Text('Join a Session'),
+              Padding(
+                padding: AppTheme.defaultPadding,
+                child: ElevatedButton(
+                  style: AppTheme.elevatedButtonStyle,
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CodeEnteringScreen(),
+                        ));
+                  },
+                  child: const Text('Join Session'),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
