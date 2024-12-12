@@ -20,11 +20,12 @@ class _MovieSelectionState extends State<MovieSelectionScreen> {
   int movieIndex = 0;
   bool isLoading = true;
   bool match = false;
+  int page = 1;
 
   @override
   void initState() {
     super.initState();
-    _fetchMovies();
+    _fetchMovies(page);
   }
 
   @override
@@ -50,7 +51,8 @@ class _MovieSelectionState extends State<MovieSelectionScreen> {
                                   child: ElevatedButton(
                                     style: AppTheme.elevatedButtonStyle,
                                     onPressed: () async {
-                                      await _fetchMovies();
+                                      page++;
+                                      await _fetchMovies(page);
                                       setState(() {
                                         movieIndex = 0;
                                       });
@@ -123,9 +125,6 @@ class _MovieSelectionState extends State<MovieSelectionScreen> {
                                         });
                                         await _showDialog();
                                       }
-                                      movieIndex == 19
-                                          ? await _fetchMovies()
-                                          : null;
                                       movieIndex++;
                                       setState(() {
                                         movies.removeAt(0);
@@ -143,9 +142,6 @@ class _MovieSelectionState extends State<MovieSelectionScreen> {
                                   style: AppTheme.elevatedButtonStyle,
                                   onPressed: () async {
                                     _vote(movies[0]['id'], false);
-                                    movieIndex == 19
-                                        ? await _fetchMovies()
-                                        : null;
                                     movieIndex++;
                                     setState(() {
                                       movies.removeAt(0);
@@ -162,16 +158,14 @@ class _MovieSelectionState extends State<MovieSelectionScreen> {
     );
   }
 
-  Future<void> _fetchMovies() async {
+  Future<void> _fetchMovies(page) async {
     final getMovie = HttpMVDBHelper();
-    var page = 1;
     try {
       var movieData = await getMovie.getPopular(page);
       setState(() {
         movies = movieData;
         isLoading = false;
       });
-      page++;
     } catch (e) {
       if (kDebugMode) {
         print(e);
