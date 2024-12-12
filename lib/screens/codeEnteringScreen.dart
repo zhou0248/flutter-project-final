@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/helpers/appTheme.dart';
 import 'package:flutter_project/screens/selectionScreen.dart';
+import 'package:flutter_project/helpers/httpSessionHelper.dart';
 
 class CodeEnteringScreen extends StatefulWidget {
   const CodeEnteringScreen({super.key});
@@ -11,7 +12,7 @@ class CodeEnteringScreen extends StatefulWidget {
 
 class _CodeEnteringScreenState extends State<CodeEnteringScreen> {
   final _formKey = GlobalKey<FormState>();
-  String code = '';
+  int code = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +44,7 @@ class _CodeEnteringScreenState extends State<CodeEnteringScreen> {
                       style: AppTheme.textTheme.titleMedium,
                       onChanged: (value) {
                         setState(() {
-                          code = value;
+                          code = int.parse(value);
                         });
                       },
                       validator: (value) {
@@ -65,10 +66,11 @@ class _CodeEnteringScreenState extends State<CodeEnteringScreen> {
                   ElevatedButton(
                     style: AppTheme.elevatedButtonStyle,
                     onPressed: () {
+                      _enterCode(code);
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => MovieSelectionScreen(),
+                            builder: (context) => const MovieSelectionScreen(),
                           ));
                     },
                     child: const Text('Join Session'),
@@ -80,5 +82,10 @@ class _CodeEnteringScreenState extends State<CodeEnteringScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> _enterCode(int code) async {
+    final httpSession = HttpSessionHelper();
+    await httpSession.enterCode(code);
   }
 }

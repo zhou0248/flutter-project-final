@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/helpers/appTheme.dart';
 import 'package:flutter_project/screens/selectionScreen.dart';
+import 'package:flutter_project/helpers/httpSessionHelper.dart';
+import 'package:flutter_project/screens/welcomeScreen.dart';
 
 class CodeSharingScreen extends StatefulWidget {
   const CodeSharingScreen({super.key});
@@ -10,7 +12,13 @@ class CodeSharingScreen extends StatefulWidget {
 }
 
 class _CodeSharingScreenState extends State<CodeSharingScreen> {
-  String code = '';
+  int? code;
+
+  @override
+  void initState() {
+    super.initState();
+    _getCode();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,26 +30,56 @@ class _CodeSharingScreenState extends State<CodeSharingScreen> {
         titleTextStyle: AppTheme.textTheme.titleMedium,
       ),
       body: Center(
-        child: Column(
-          children: [
-            Padding(
-              padding: AppTheme.largePadding,
-              child: Text('Code: $code', style: AppTheme.textTheme.titleMedium),
-            ),
-            ElevatedButton(
-              style: AppTheme.elevatedButtonStyle,
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => MovieSelectionScreen(),
-                    ));
-              },
-              child: const Text('Start Session'),
-            ),
-          ],
-        ),
+        child: code != null
+            ? Column(
+                children: [
+                  Padding(
+                    padding: AppTheme.largePadding,
+                    child: Text('Code: $code',
+                        style: AppTheme.textTheme.titleMedium),
+                  ),
+                  ElevatedButton(
+                    style: AppTheme.elevatedButtonStyle,
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const MovieSelectionScreen(),
+                          ));
+                    },
+                    child: const Text('Start Session'),
+                  ),
+                ],
+              )
+            : Column(
+                children: [
+                  Padding(
+                    padding: AppTheme.largePadding,
+                    child: Text('Unable to Generate a Code',
+                        style: AppTheme.textTheme.titleMedium),
+                  ),
+                  ElevatedButton(
+                    style: AppTheme.elevatedButtonStyle,
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const WelcomeScreen(),
+                          ));
+                    },
+                    child: const Text('Return to HomePage'),
+                  ),
+                ],
+              ),
       ),
     );
+  }
+
+  Future<void> _getCode() async {
+    final httpSession = HttpSessionHelper();
+    final sessionCode = await httpSession.getCode();
+    setState(() {
+      code = sessionCode;
+    });
   }
 }
