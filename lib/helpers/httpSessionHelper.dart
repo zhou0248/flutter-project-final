@@ -63,8 +63,10 @@ class HttpSessionHelper {
       } else {
         return false;
       }
+    } else if (response.statusCode == 767) {
+      throw ('Error: You have already voted for this movie');
     } else {
-      throw Exception('Failed to vote for movie');
+      throw ('Failed to vote for movie');
     }
   }
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_project/helpers/appTheme.dart';
 import 'package:flutter_project/screens/selectionScreen.dart';
 import 'package:flutter_project/helpers/httpSessionHelper.dart';
-import 'package:flutter_project/screens/welcomeScreen.dart';
 
 class CodeSharingScreen extends StatefulWidget {
   const CodeSharingScreen({super.key});
@@ -53,9 +52,9 @@ class _CodeSharingScreenState extends State<CodeSharingScreen> {
               )
             : Column(
                 children: [
-                  Padding(
+                  const Padding(
                     padding: AppTheme.largePadding,
-                    child: const CircularProgressIndicator(),
+                    child: CircularProgressIndicator(),
                   ),
                   Text('Getting code...', style: AppTheme.textTheme.bodyMedium),
                 ],

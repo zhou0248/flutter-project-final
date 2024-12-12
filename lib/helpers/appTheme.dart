@@ -27,12 +27,12 @@ class AppTheme {
         fontFamily: 'Catamaran',
         fontSize: 24.0,
         fontWeight: FontWeight.w500,
-        color: colorScheme.primary),
+        color: colorScheme.secondary),
     bodySmall: TextStyle(
         fontFamily: 'Catamaran',
         fontSize: 18.0,
         fontWeight: FontWeight.w400,
-        color: colorScheme.primary),
+        color: colorScheme.secondary),
   );
   static const defaultPadding = EdgeInsets.all(20.0);
   static const largePadding = EdgeInsets.all(30.0);

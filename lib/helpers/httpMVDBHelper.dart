@@ -10,8 +10,7 @@ class HttpMVDBHelper {
   final apiKey = dotenv.env['TMDB_API_KEY'];
   var movies = [];
 
-  Future<dynamic> getPopular() async {
-    var page = 1;
+  Future<dynamic> getPopular(int page) async {
     final result = await http
         .get(Uri.parse('$baseUrl$popular?api_key=$apiKey&page=$page'));
     if (result.statusCode == 200) {
@@ -20,7 +19,6 @@ class HttpMVDBHelper {
         print(data);
       }
       movies = data['results'];
-      page++;
       return movies;
     } else {
       throw Exception(

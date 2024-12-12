@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import './screens/codeEnteringScreen.dart';
-import './screens/codeSharingScreen.dart';
 import './screens/welcomeScreen.dart';
-import './screens/selectionScreen.dart';
 import './helpers/appTheme.dart';
 
 Future<void> main() async {

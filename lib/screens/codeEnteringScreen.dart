@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_project/helpers/appTheme.dart';
 import 'package:flutter_project/screens/selectionScreen.dart';
@@ -86,6 +87,19 @@ class _CodeEnteringScreenState extends State<CodeEnteringScreen> {
 
   Future<void> _enterCode(int code) async {
     final httpSession = HttpSessionHelper();
-    await httpSession.enterCode(code);
+    try {
+      await httpSession.enterCode(code);
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('$e'),
+          ),
+        );
+      }
+    }
   }
 }
