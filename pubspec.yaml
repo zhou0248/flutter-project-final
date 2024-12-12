@@ -29,3 +29,13 @@ flutter:
   uses-material-design: true
   assets:
     - .env
+    - assets/default_poster.jpg
+
+  fonts:
+    - family: Catamaran
+      fonts:
+        - asset: assets/fonts/Catamaran-Regular.ttf
+        - asset: assets/fonts/Catamaran-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Catamaran-Medium.ttf
+          weight: 500
