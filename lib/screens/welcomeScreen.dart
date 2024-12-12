@@ -60,25 +60,31 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       body: Center(
         child: Column(
           children: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => CodeSharingScreen(),
-                    ));
-              },
-              child: const Text('Start a Session'),
+            Padding(
+              padding: EdgeInsets.all(20),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CodeSharingScreen(),
+                      ));
+                },
+                child: const Text('Start a Session'),
+              ),
             ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => CodeEnteringScreen(),
-                    ));
-              },
-              child: const Text('Join a Session'),
+            Padding(
+              padding: EdgeInsets.all(20),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CodeEnteringScreen(),
+                      ));
+                },
+                child: const Text('Join a Session'),
+              ),
             ),
           ],
         ),
