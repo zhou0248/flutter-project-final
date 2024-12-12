@@ -13,6 +13,8 @@ dependencies:
     sdk: flutter
   http:
   flutter_dotenv:
+  android_id:
+  device_info_plus:
 
   cupertino_icons: ^1.0.8
 
@@ -24,3 +26,5 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - .env

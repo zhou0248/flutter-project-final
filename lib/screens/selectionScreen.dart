@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
@@ -52,7 +53,10 @@ class _MovieSelectionState extends State<MovieSelectionPage> {
   Future<void> _fetchMovies() async {
     final apiKey = dotenv.env['TMDB_API_KEY'];
     final response = await http.get(Uri.parse('$baseUrl?api_key=$apiKey'));
-    print(response.body);
+
+    if (kDebugMode) {
+      print(response.body);
+    }
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
