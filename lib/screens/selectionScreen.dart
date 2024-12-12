@@ -1,10 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_project/helpers/appTheme.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'package:flutter_project/helpers/httpMVDBHelper.dart';
+import 'package:flutter_project/helpers/httpSessionHelper.dart';
 
 class MovieSelectionScreen extends StatefulWidget {
   const MovieSelectionScreen({super.key});
@@ -86,5 +84,11 @@ class _MovieSelectionState extends State<MovieSelectionScreen> {
         print(e);
       }
     }
+  }
+
+  Future<bool> _vote(int movieId, bool vote) async {
+    final httpSession = HttpSessionHelper();
+    final response = await httpSession.voteMovie(movieId.toString(), vote);
+    return response;
   }
 }

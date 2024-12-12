@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -20,7 +21,10 @@ class HttpSessionHelper {
       final data = jsonDecode(response.body)['data'];
       sessionID = data['session_id'];
       await prefs.setString('session_id', sessionID);
-      code = data['code'];
+      code = data['code'] = int.parse(data['code']);
+      if (kDebugMode) {
+        print('Data: $data\n Code $code');
+      }
       return code;
     } else if (response.statusCode == 400) {
       throw Exception('Error: ${response.body.toString()}');

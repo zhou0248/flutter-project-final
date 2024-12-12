@@ -50,7 +50,7 @@ class _CodeEnteringScreenState extends State<CodeEnteringScreen> {
                       validator: (value) {
                         if (value == null ||
                             value.isEmpty ||
-                            value.length != 4) {
+                            value.length > 4) {
                           return 'Please enter a valid code';
                         }
                         return null;
