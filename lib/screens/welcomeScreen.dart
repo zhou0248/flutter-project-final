@@ -13,7 +13,7 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-  String deviceUUID = '';
+  String _deviceUUID = '';
 
   @override
   void initState() {
@@ -22,7 +22,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   }
 
   Future<void> _fetchUUID() async {
-    String deviceUUID = '';
+    String deviceUUID;
 
     try {
       if (Platform.isAndroid) {
@@ -39,10 +39,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       if (kDebugMode) {
         print(e);
       }
+      deviceUUID = "Error: $e";
     }
     if (mounted) {
       setState(() {
-        deviceUUID = deviceUUID;
+        _deviceUUID = deviceUUID;
       });
     }
   }
@@ -67,7 +68,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               },
               child: const Text('Start Session'),
             ),
-            Text('Device UUID: $deviceUUID'),
+            Text('Device UUID: $_deviceUUID'),
           ],
         ),
       ),

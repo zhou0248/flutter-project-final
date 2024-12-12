@@ -4,14 +4,14 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class MovieSelectionPage extends StatefulWidget {
-  const MovieSelectionPage({super.key});
+class MovieSelectionScreen extends StatefulWidget {
+  const MovieSelectionScreen({super.key});
 
   @override
-  State<MovieSelectionPage> createState() => _MovieSelectionState();
+  State<MovieSelectionScreen> createState() => _MovieSelectionState();
 }
 
-class _MovieSelectionState extends State<MovieSelectionPage> {
+class _MovieSelectionState extends State<MovieSelectionScreen> {
   final baseUrl = 'https://api.themoviedb.org/3/movie/popular';
   final imageBaseUrl = 'https://image.tmdb.org/t/p/w500';
 
@@ -29,9 +29,10 @@ class _MovieSelectionState extends State<MovieSelectionPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Movie Choice'),
+        backgroundColor: Colors.amber,
       ),
       body: isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? Center(child: CircularProgressIndicator())
           : Center(
               child: Dismissible(
                 key: Key(movies[0]['id'].toString()),
@@ -54,15 +55,16 @@ class _MovieSelectionState extends State<MovieSelectionPage> {
     final apiKey = dotenv.env['TMDB_API_KEY'];
     final response = await http.get(Uri.parse('$baseUrl?api_key=$apiKey'));
 
-    if (kDebugMode) {
-      print(response.body);
-    }
-
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
-      setState() {
+      setState(() {
         movies = data['results'];
         isLoading = false;
+      });
+
+      if (kDebugMode) {
+        print(data);
+        print(data['results']);
       }
     } else {
       setState(() {
